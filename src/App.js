@@ -9,17 +9,25 @@ class App extends React.Component {
     super();
     this.state = {
       products: data.products,
-      cartItems : [] ,
+      //code 1 : this.line -> after we refresh the page but cart items removed or refreshed
+      cartItems : localStorage.getItem("cartItems") ? JSON.parse(localStorage.getItem("cartItems")) : [],
       size: "",
       sort: "",
     };
+  }
+  //create order
+  createOrder = (order) => {
+    alert("Need to save order for " + order.name);
   }
   //remove in cart
   removeFromCart = (product) => {
     const cartItems = this.state.cartItems.slice();
     this.setState({
+      //get item in cart by product id in json file
       cartItems : cartItems.filter((x) => x._id !== product._id) ,
     });
+     //code 1 : this.line -> after we refresh the page but cart items removed or refreshed
+    localStorage.setItem("cartItems" , JSON.stringify(cartItems.filter((x) => x._id !== product._id)));
   };
   //add to cart
   addToCart = (product) => {
@@ -37,6 +45,8 @@ class App extends React.Component {
       cartItems.push({...product , count: 1});
     }
     this.setState({cartItems});
+     //code 1 : this.line -> after we refresh the page but cart items removed or refreshed
+    localStorage.setItem("cartItems" , JSON.stringify(cartItems));
   };
   //sort products by price
   sortProducts = (event) => {
@@ -107,6 +117,7 @@ class App extends React.Component {
               <Cart
                 cartItems={this.state.cartItems}
                 removeFromCart={this.removeFromCart}
+                createOrder={this.createOrder}
               /></div>
 
           </div>
