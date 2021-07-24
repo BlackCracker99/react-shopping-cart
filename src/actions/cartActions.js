@@ -28,4 +28,3 @@ export const removeFromCart = (product) => (dispatch, getState) => {
   dispatch({ type: REMOVE_FROM_CART, payload: { cartItems } });
   localStorage.setItem("cartItems", JSON.stringify(cartItems));
 };
-//*
