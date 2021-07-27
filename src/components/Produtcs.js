@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import formatCurrency from '../util'
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default class   extends Component {
+export default class  products extends Component {
     render() {
         return (
             <div>
